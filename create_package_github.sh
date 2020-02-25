@@ -1,12 +1,12 @@
 #! /bin/bash
 
 OWNER=ynahmany
-REPOSITORY=brainbackup
+REPOSITORY=brainbackup/platform
 IMAGE_NAME=server
-VERSION=latest
+VERSION=0.1
 VERSION_PATH=../../code-snippet/server
 IMAGE_ID=1ea2cfef3de5
-DOCKER_PATH=docker.pkg.github.com/$OWNER/$REPOSITORY/$IMAGE_NAME:$VERSION
+DOCKER_PATH=docker.pkg.github.com/$REPOSITORY/$IMAGE_NAME:$VERSION
 
 docker login -u $OWNER -p $TOKEN docker.pkg.github.com
 

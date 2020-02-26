@@ -21,16 +21,25 @@
     "location": "East US",
     "vm_size": "Standard_DS2_v2"
   }],
-  "provisioners": [{
-    "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",
-    "inline": [
-      "apt-get update",
-      "apt-get upgrade -y",
-      "apt-get -y install nginx",
+  "provisioners": [
+    {
+      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",
+      "inline": [
+        "apt-get update",
+        "apt-get upgrade -y",
+        "apt-get -y install nginx",
 
-      "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"
-    ],
-    "inline_shebang": "/bin/sh -x",
-    "type": "shell"
-  }]
+        "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"
+      ],
+      "inline_shebang": "/bin/sh -x",
+      "type": "shell"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "docker-import",
+      "repository": "docker.pkg.github.com/brainbackup/code-snippet/web-ui:latest",
+      "tag": "latest"
+    }
+  ]
 }
